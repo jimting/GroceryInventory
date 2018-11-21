@@ -1,4 +1,4 @@
-package hello;
+package groceryInventory;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-public class HelloController {
+public class GroceryInventoryController {
     
     @RequestMapping("/")
     public String index() {
@@ -36,10 +37,10 @@ public class HelloController {
     	return "今天天氣很好!";
     }
     
-    @GetMapping(value = "/count/{a}&{b}") 
-    public int count(@PathVariable int a, @PathVariable int b)
+    @GetMapping("/getGrocery/") 
+    public String getGrocery(@RequestParam("userID") String userID)
     {
-    	return Hello.add(a, b);
+    	return GroceryInventory.getGrocery(userID);
     }
     
     @RequestMapping("/test") 

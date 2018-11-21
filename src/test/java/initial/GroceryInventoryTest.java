@@ -2,9 +2,6 @@ package initial;
 
 import org.junit.Test;
 
-import groceryInventory.GroceryInventory;
-import junit.framework.Assert;
-
 public class GroceryInventoryTest {
 
 	@Test

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -37,7 +38,7 @@ public class GroceryInventoryController {
     	return "今天天氣很好!";
     }
     
-    @GetMapping("/getGrocery/") 
+    @RequestMapping(value = "getGrocery", method = RequestMethod.GET)
     public String getGrocery(@RequestParam("userID") String userID)
     {
     	return GroceryInventory.getGrocery(userID);

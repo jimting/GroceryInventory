@@ -1,5 +1,11 @@
 package groceryInventory;
 
+import java.io.IOException;
+
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 public class GroceryInventory {
 	public static String getGrocery(String userID) 
 	{
@@ -19,9 +25,24 @@ public class GroceryInventory {
 	}
 	public static String getNotification() 
 	{
-		//拿取所有通知
-		String result = "[{\"content\":\"通知內容1\", \"status\":\"unread \"},{\"content\":\"通知內容2\", \"status\":\"unread \"},{\"content\":\"通知內容3\", \"status\":\"unread \"}]";
-		return result;
+		try {//拿取所有通知
+			String toiletUrl = "http://140.121.197.134:4091/getNotification?userID=1";
+			Connection con = Jsoup.connect(toiletUrl).timeout(10000);
+			Connection.Response resp;
+		
+			resp = con.execute();
+		
+			Document doc = null;
+			if (resp.statusCode() == 200) {
+				doc = con.get();
+			}
+			String result = doc.select("body").html().toString();
+			return result;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "[]";
 	}
 	
 

@@ -63,7 +63,7 @@ public class GroceryInventoryController {
 
             
             //通過連線認證獲取MongoDB連線
-            MongoClient mongoClient = MongoClients.create(settings);
+            MongoClient mongoClient = MongoClients.create("mongo://cinema:cinema@140.121.196.23:4118");
             
             //連線到資料庫(schema)
             MongoDatabase mongoDatabase = mongoClient.getDatabase("Grocery");

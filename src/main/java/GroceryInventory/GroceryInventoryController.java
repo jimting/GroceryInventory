@@ -51,17 +51,6 @@ public class GroceryInventoryController {
 			System.out.println("MongoDBConnect to database begin");
             //連線到MongoDB服務 如果是遠端連線可以替換“localhost”為伺服器所在IP地址
 			
-            //MongoCredential.createScramSha1Credential()三個引數分別為 使用者名稱 資料庫名稱 密碼
-            MongoCredential credential = MongoCredential.createScramSha1Credential("cinema", "Grocery", "cinema".toCharArray());
-         
-            MongoClientSettings settings = MongoClientSettings.builder()
-                    .credential(credential)
-                    .applyToSslSettings(builder -> builder.enabled(true))
-                    .applyToClusterSettings(builder -> 
-                        builder.hosts(Arrays.asList(new ServerAddress("140.121.196.23", 4118))))
-                    .build();
-
-            
             //通過連線認證獲取MongoDB連線
             MongoClient mongoClient = MongoClients.create("mongodb://cinema:cinema@140.121.196.23:4118");
             
@@ -82,7 +71,7 @@ public class GroceryInventoryController {
             	result += cursor.next().toJson();
             }
             System.out.println("Connect to database successfully");
-            return "Connect to database successfully:\n" + result;
+            return result;
             
         } catch (Exception e) {  
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

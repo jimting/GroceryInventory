@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.MongoDatabase;
@@ -72,12 +74,17 @@ public class GroceryInventoryController {
             //建立集合
 //            mongoDatabase.createCollection("test");
 //            System.out.println("集合建立成功");
-//選擇集合
+//選擇集合	
+            String result = "";
             MongoCollection<Document> collection = mongoDatabase.getCollection("grocery");
-            
-            Document myDoc = collection.find().first();
+            FindIterable<Document> fi = collection.find();
+            MongoCursor<Document> cursor = fi.iterator();
+            while(cursor.hasNext()) 
+            {
+            	result += cursor.next().toJson();
+            }
             System.out.println("Connect to database successfully");
-            return "Connect to database successfully:\n" + myDoc.toJson();
+            return "Connect to database successfully:\n" + result;
             
         } catch (Exception e) {  
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

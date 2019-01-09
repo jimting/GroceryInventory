@@ -73,11 +73,11 @@ public class GroceryInventoryController {
 //            mongoDatabase.createCollection("test");
 //            System.out.println("集合建立成功");
 //選擇集合
-            MongoCollection collection = mongoDatabase.getCollection("grocery");
+            MongoCollection<Document> collection = mongoDatabase.getCollection("grocery");
             
 			
             System.out.println("Connect to database successfully");
-            return "Connect to database successfully:\n" + collection.find().first().toString();
+            return "Connect to database successfully:\n" + collection.find().first().toJson();
             
         } catch (Exception e) {  
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

@@ -1,2 +1,0 @@
-# GroceryInventory
-Microservice example

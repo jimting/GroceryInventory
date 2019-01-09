@@ -77,7 +77,7 @@ public class GroceryInventoryController {
             
 			
             System.out.println("Connect to database successfully");
-            return "Connect to database successfully:\n" + collection.find().comment("A Land Imaged");
+            return "Connect to database successfully:\n" + collection.find().first().toString();
             
         } catch (Exception e) {  
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -92,7 +92,7 @@ public class GroceryInventoryController {
 	@RequestMapping(value = "getCinemaCatalog", method = RequestMethod.GET)
     public String getCinemaCatalog(@RequestParam("userID") String userID)
     {
-    	return GroceryInventory.getCinemaCatalog(userID);
+    	return GroceryInventory.getGrocery(userID);
     }
 	
 	SingleResultCallback<Document> printDocument = new SingleResultCallback<Document>() {

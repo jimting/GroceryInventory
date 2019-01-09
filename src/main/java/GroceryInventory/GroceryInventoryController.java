@@ -53,9 +53,7 @@ public class GroceryInventoryController {
 			
             //MongoCredential.createScramSha1Credential()三個引數分別為 使用者名稱 資料庫名稱 密碼
             MongoCredential credential = MongoCredential.createScramSha1Credential("cinema", "Grocery", "cinema".toCharArray());
-            List<MongoCredential> credentials = new ArrayList<MongoCredential>();
-            credentials.add(credential);
-
+         
             MongoClientSettings settings = MongoClientSettings.builder()
                     .credential(credential)
                     .applyToSslSettings(builder -> builder.enabled(true))

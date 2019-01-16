@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ import com.mongodb.client.model.Filters.*;
 
 @RestController
 public class GroceryInventoryController {
-	
+	@CrossOrigin(origins = "*")
 	@RequestMapping("/")
     public String index() 
     {

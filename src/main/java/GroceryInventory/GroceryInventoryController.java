@@ -20,7 +20,7 @@ public class GroceryInventoryController {
 		return "success";
     }
 	
-	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "getGrocery", method = RequestMethod.GET)
     public String getGrocery(@RequestParam("userID") String userID)
     {

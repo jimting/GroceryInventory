@@ -34,7 +34,8 @@ public class GroceryInventory {
             while(cursor.hasNext()) 
             {
             	result += cursor.next().toJson();
-            	result += ",";
+            	if(cursor.hasNext())
+            		result += ",";
             }
             result += "]";
             System.out.println("Connect to database successfully");

@@ -21,7 +21,7 @@ public class GroceryInventoryController {
     }
 	
 	
-	@RequestMapping(value = "getCinemaCatalog", method = RequestMethod.GET)
+	@RequestMapping(value = "getGrocery", method = RequestMethod.GET)
     public String getGrocery(@RequestParam("userID") String userID)
     {
     	return GroceryInventory.getGrocery(userID);

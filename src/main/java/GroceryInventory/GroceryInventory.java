@@ -1,11 +1,48 @@
 package GroceryInventory;
 
+import org.bson.Document;
+
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+
 public class GroceryInventory {
 	public static String getGrocery(String userID) {
-		String result = "{\"status\":\"200\", \"name\":\"使用者名字\", \"notification\":[{\"content\":\"通知內容1\", \"status\":\"unread \"},{\"content\":\"通知內容2\", \"status\":\"unread \"},{\"content\":\"通知內容3\", \"status\":\"unread \"}], \"items\":[{\"ID\":\"1\", \"name\":\"電影名稱1\", \"content\":\"電影介紹1\", \"quantity\":\"30\", \"pic\":\"電影照片url\"},{\"ID\":\"1\", \"name\":\"電影名稱2\", \"content\":\"電影介紹2\", \"quantity\":\"40\", \"pic\":\"電影照片url\"},{\"ID\":\"1\", \"name\":\"電影名稱2\", \"content\":\"電影介紹2\", \"quantity\":\"50\", \"pic\":\"電影照片url\"}]}";
-		
-		
-		
-		return result;
+		try {  
+            
+			System.out.println("MongoDBConnect to database begin");
+            //連線到MongoDB服務 如果是遠端連線可以替換“localhost”為伺服器所在IP地址
+			
+            //通過連線認證獲取MongoDB連線
+            MongoClient mongoClient = MongoClients.create("mongodb://cinema:cinema@140.121.196.23:4118");
+            
+            //連線到資料庫(schema)
+            MongoDatabase mongoDatabase = mongoClient.getDatabase("Grocery");
+            System.out.println("MongoDBConnect to database successfully");
+
+            //建立集合
+//            mongoDatabase.createCollection("test");
+//            System.out.println("集合建立成功");
+//選擇集合	
+            String result = "[";
+            MongoCollection<Document> collection = mongoDatabase.getCollection("grocery");
+            FindIterable<Document> fi = collection.find();
+            MongoCursor<Document> cursor = fi.iterator();
+            while(cursor.hasNext()) 
+            {
+            	result += cursor.next().toJson();
+            	result += ",";
+            }
+            result += "]";
+            System.out.println("Connect to database successfully");
+            return result;
+            
+        } catch (Exception e) {  
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return "{}";
+        }
 	}
 }

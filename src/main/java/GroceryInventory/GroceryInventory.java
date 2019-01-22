@@ -9,6 +9,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import org.bson.types.ObjectId;
 
 public class GroceryInventory {
 	public static String getGrocery(String userID) {
@@ -67,7 +68,7 @@ public class GroceryInventory {
             String result = "[";
             MongoCollection<Document> collection = mongoDatabase.getCollection("grocery");
             BasicDBObject whereQuery = new BasicDBObject();
-        	whereQuery.put("_id", ID);
+        	whereQuery.put("_id", new ObjectId(ID));
             FindIterable<Document> fi = collection.find(whereQuery);
             MongoCursor<Document> cursor = fi.iterator();
             while(cursor.hasNext()) 

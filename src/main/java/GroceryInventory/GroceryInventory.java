@@ -17,7 +17,7 @@ import org.bson.types.ObjectId;
 import org.jsoup.Jsoup;
 
 public class GroceryInventory {
-	public static String getGrocery(String userID) {
+	public static String getGrocery() {
 		try {  
             
 			System.out.println("MongoDBConnect to database begin");

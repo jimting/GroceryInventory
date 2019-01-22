@@ -22,9 +22,9 @@ public class GroceryInventoryController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "getGrocery", method = RequestMethod.GET)
-    public String getGrocery(@RequestParam("userID") String userID)
+    public String getGrocery()
     {
-    	return GroceryInventory.getGrocery(userID);
+    	return GroceryInventory.getGrocery();
     }
 	
 	@CrossOrigin(origins = "*")

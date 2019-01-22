@@ -1,5 +1,9 @@
 package GroceryInventory;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.bson.Document;
 
 import com.mongodb.BasicDBObject;
@@ -10,6 +14,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.types.ObjectId;
+import org.jsoup.Jsoup;
 
 public class GroceryInventory {
 	public static String getGrocery(String userID) {
@@ -85,5 +90,22 @@ public class GroceryInventory {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             return "{}";
         }
+	}
+	public static String getNotification(String ID) 
+	{
+		String result = "";
+		//這邊利用Jsoup爬蟲 直接拿到Notification的資料
+		try {
+			URL url = new URL("http://140.121.196.23:4102/getNotification?userID="+ID);
+			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
+			result = xmlDoc.html();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return result;
 	}
 }

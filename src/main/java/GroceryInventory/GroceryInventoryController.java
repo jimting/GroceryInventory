@@ -31,7 +31,7 @@ public class GroceryInventoryController {
 	@RequestMapping(value = "getGroceryByID", method = RequestMethod.GET)
     public String getGroceryByID(@RequestParam("ID") String ID)
     {
-    	return GroceryInventory.getGrocery(ID);
+    	return GroceryInventory.getGroceryByID(ID);
     }
 	
 }

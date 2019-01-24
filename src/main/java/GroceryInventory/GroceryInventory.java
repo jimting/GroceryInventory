@@ -116,7 +116,7 @@ public class GroceryInventory {
 		try {
 			URL url = new URL("http://140.121.196.23:4105/newGroceryOrdering?groceryID="+ID+"&quantity="+quantity);
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
-			result = xmlDoc.html();
+			result = xmlDoc.select("body").get(0).text();
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

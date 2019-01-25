@@ -185,7 +185,7 @@ public class GroceryInventory {
 		String result = "";
 		//這邊利用Jsoup爬蟲 直接拿到已經購買的Grocery資料
 		try {
-			URL url = new URL("http://140.121.196.23:4102/newNotification?userID="+userID+"&content="+content);
+			URL url = new URL("http://140.121.196.23:4102/newNotification?userID="+userID+"&content="+content.getBytes("UTF8"));
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
 			result = xmlDoc.select("body").get(0).text();
 			

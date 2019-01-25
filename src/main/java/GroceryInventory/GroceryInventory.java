@@ -14,6 +14,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.types.ObjectId;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 
 public class GroceryInventory {
@@ -125,5 +127,58 @@ public class GroceryInventory {
 			e.printStackTrace();
 		} 
 		return result;
+	}
+	
+	public static String getGroceryFromOrderList(String userID) 
+	{
+		String result = "";
+		String groceryData = "";
+		//這邊利用Jsoup爬蟲 直接拿到已經購買的Grocery資料
+		try {
+			URL url = new URL("http://140.121.196.23:4105/getGroceryByOrderList?userID="+userID);
+			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
+			groceryData = xmlDoc.select("body").get(0).text();
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		//這邊要處理拿到的資料
+		JSONArray groceryList = new JSONArray(groceryData);
+		for(int i = 0; i < groceryList.length();i++) 
+		{
+			JSONObject groceryItem = groceryList.getJSONObject(i);
+			String groceryID = groceryItem.getString("ObjectID");
+			String quantity = groceryItem.getString("Quantity");
+			String groceryTemp="";
+			try {
+				URL url = new URL("http://140.121.196.23:4103/getGroceryByID?ID="+groceryID);
+				org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
+				groceryTemp = xmlDoc.select("body").get(0).text();
+				
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			JSONArray groceryTempData = new JSONArray(groceryTemp);
+			String name = groceryTempData.getJSONObject(0).getString("name");
+			String img_url = groceryTempData.getJSONObject(0).getString("img_url");
+			String price = groceryTempData.getJSONObject(0).getString("price");
+			
+			return name;
+		}
+		
+		return result;
+	}
+	public static void main() 
+	{
+		System.out.print(getGroceryFromOrderList("1"));
 	}
 }

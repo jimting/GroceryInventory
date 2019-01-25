@@ -48,6 +48,12 @@ public class GroceryInventoryController {
     	return GroceryInventory.orderingGrocery(ID, quantity);
     }
 	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "getGroceryFromOrderList", method = RequestMethod.GET)
+    public String getGroceryFromOrderList(@RequestParam("userID") String userID)
+    {
+    	return GroceryInventory.getGroceryFromOrderList(userID);
+    }
 	
 	
 }

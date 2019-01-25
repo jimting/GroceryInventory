@@ -172,7 +172,7 @@ public class GroceryInventory {
 			String img_url = groceryTempData.getJSONObject(0).getString("img_url");
 			String price = groceryTempData.getJSONObject(0).getString("price");
 			
-			result += "{\"name\":"+name+",\"quantity\":"+quantity+",\"price\":"+price+",\"img_url\":"+img_url+"}";
+			result += "{\"name\":\""+name+"\",\"quantity\":\""+quantity+"\",\"price\":\""+price+"\",\"img_url\":\""+img_url+"\"}";
 			if(i != groceryList.length()-1)
 				result += ",";
 		}

@@ -131,7 +131,7 @@ public class GroceryInventory {
 	
 	public static String getGroceryFromOrderList(String userID) 
 	{
-		String result = "";
+		String result = "{";
 		String groceryData = "";
 		//這邊利用Jsoup爬蟲 直接拿到已經購買的Grocery資料
 		try {
@@ -172,7 +172,9 @@ public class GroceryInventory {
 			String img_url = groceryTempData.getJSONObject(0).getString("img_url");
 			String price = groceryTempData.getJSONObject(0).getString("price");
 			
-			return name;
+			result += "{\"name\":"+name+",\"quantity\":"+quantity+",\"price\":"+price+",\"img_url\":"+img_url+"}";
+			if(i != groceryList.length()-1)
+				result += ",";
 		}
 		
 		return result;

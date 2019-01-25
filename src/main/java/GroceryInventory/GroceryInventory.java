@@ -179,6 +179,26 @@ public class GroceryInventory {
 		result += "]";
 		return result;
 	}
+	
+	public static String testNotification(String userID, String content) 
+	{
+		String result = "";
+		//這邊利用Jsoup爬蟲 直接拿到已經購買的Grocery資料
+		try {
+			URL url = new URL("http://140.121.196.23:4102/newNotification?userID="+userID+"&content="+content);
+			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
+			result = xmlDoc.select("body").get(0).text();
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result; 
+	}
+	
 	public static void main() 
 	{
 		System.out.print(getGroceryFromOrderList("1"));

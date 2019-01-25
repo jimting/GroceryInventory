@@ -55,6 +55,13 @@ public class GroceryInventoryController {
     	return GroceryInventory.getGroceryFromOrderList(userID);
     }
 	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "testNotification", method = RequestMethod.GET)
+    public String testNotification(@RequestParam("userID") String userID, @RequestParam("content") String content)
+    {
+    	return GroceryInventory.testNotification(userID,content);
+    }
+	
 	
 }
 

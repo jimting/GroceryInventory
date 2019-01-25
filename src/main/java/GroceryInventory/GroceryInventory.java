@@ -176,7 +176,7 @@ public class GroceryInventory {
 			if(i != groceryList.length()-1)
 				result += ",";
 		}
-		
+		result += "]";
 		return result;
 	}
 	public static void main() 

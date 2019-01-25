@@ -131,7 +131,7 @@ public class GroceryInventory {
 	
 	public static String getGroceryFromOrderList(String userID) 
 	{
-		String result = "{";
+		String result = "[";
 		String groceryData = "";
 		//這邊利用Jsoup爬蟲 直接拿到已經購買的Grocery資料
 		try {

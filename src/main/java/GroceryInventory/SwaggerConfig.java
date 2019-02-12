@@ -20,17 +20,17 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("info.xiaomo.website"))
+                .apis(RequestHandlerSelectors.basePackage("GroceryInventory"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Spring Boot中使用Swagger2构建RESTful APIs")
-                .description("api根地址：http://api.xiaomo.info:8080/")
-                .termsOfServiceUrl("https://xiaomo.info/")
-                .contact("小莫")
+                .title("GroceryInventory")
+                .description("root：http://140.121.196.23:4107/")
+                .termsOfServiceUrl("http://140.121.196.23:4107/")
+                .contact("JT")
                 .version("1.0")
                 .build();
     }

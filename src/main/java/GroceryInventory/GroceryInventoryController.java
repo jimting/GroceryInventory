@@ -19,7 +19,7 @@ public class GroceryInventoryController {
 	
 	@ApiOperation(value = "測試此伺服器是否成功連線", notes = "成功連線就回傳success")
 	@CrossOrigin(origins = "*")
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() 
     {
 		return "success";

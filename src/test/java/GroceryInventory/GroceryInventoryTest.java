@@ -13,7 +13,6 @@ public class GroceryInventoryTest
 	//controller's test
 	
 	@Test
-	//index
 	public void testIndex()
 	{
 		assertEquals("success", groceryInventory.index());
@@ -38,6 +37,11 @@ public class GroceryInventoryTest
 		assertTrue(isJSONValid(groceryInventory.getNotification("1")));
 	}
 	
+	@Test
+	public void testGetGroceryFromOrderList()
+	{
+		assertTrue(isJSONValid(groceryInventory.getGroceryFromOrderList("1")));
+	}
 	
 	
 	public boolean isJSONValid(String test) {

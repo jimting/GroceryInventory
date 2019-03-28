@@ -139,7 +139,6 @@ public class GroceryInventory {
 			URL url = new URL("http://140.121.196.23:4105/getGroceryFromOrderList?userID="+userID);
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
 			groceryData = xmlDoc.select("body").get(0).text();
-			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,19 +154,7 @@ public class GroceryInventory {
 			JSONObject groceryItem = groceryList.getJSONObject(i);
 			String groceryID = groceryItem.getString("ObjectID");
 			String quantity = groceryItem.getString("Quantity");
-			String groceryTemp="";
-			try {
-				URL url = new URL("http://140.121.196.23:4103/getGroceryByID?ID="+groceryID);
-				org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
-				groceryTemp = xmlDoc.select("body").get(0).text();
-				
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
+			String groceryTemp=getGroceryByID(groceryID);
 			JSONArray groceryTempData = new JSONArray(groceryTemp);
 			String name = groceryTempData.getJSONObject(0).getString("name");
 			String img_url = groceryTempData.getJSONObject(0).getString("img_url");

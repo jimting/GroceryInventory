@@ -99,7 +99,7 @@ public class GroceryInventory {
 		String result = "";
 		//這邊利用Jsoup爬蟲 直接拿到Notification的資料
 		try {
-			URL url = new URL("http://140.121.196.23:4102/getNotification?userID="+ID);
+			URL url = new URL("http://140.121.196.23:4139/notification/getNotification?userID="+ID);
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
 			result = xmlDoc.select("body").get(0).text();
 		} catch (MalformedURLException e) {
@@ -117,7 +117,7 @@ public class GroceryInventory {
 		String result = "";
 		//這邊利用Jsoup爬蟲 直接拿到資料
 		try {
-			URL url = new URL("http://140.121.196.23:4105/newGroceryOrdering?groceryID="+ID+"&quantity="+quantity);
+			URL url = new URL("http://140.121.196.23:4139/ordering/newGroceryOrdering?groceryID="+ID+"&quantity="+quantity);
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
 			result = xmlDoc.select("body").get(0).text();
 		} catch (MalformedURLException e) {
@@ -136,7 +136,7 @@ public class GroceryInventory {
 		String groceryData = "";
 		//這邊利用Jsoup爬蟲 直接拿到已經購買的Grocery資料
 		try {
-			URL url = new URL("http://140.121.196.23:4105/getGroceryFromOrderList?userID="+userID);
+			URL url = new URL("http://140.121.196.23:4139/ordering/getGroceryFromOrderList?userID="+userID);
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
 			groceryData = xmlDoc.select("body").get(0).text();
 		} catch (MalformedURLException e) {
@@ -173,7 +173,7 @@ public class GroceryInventory {
 		String result = "";
 		//這邊利用Jsoup爬蟲 直接拿到已經購買的Grocery資料
 		try {
-			URL url = new URL("http://140.121.196.23:4102/newNotification?userID="+userID+"&content="+content.getBytes("UTF8"));
+			URL url = new URL("http://140.121.196.23:4139/notification/newNotification?userID="+userID+"&content="+content.getBytes("UTF8"));
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
 			result = xmlDoc.select("body").get(0).text();
 			

@@ -48,7 +48,17 @@ public class GroceryInventoryController {
     public String getNotification(@ApiParam(required = true, name = "userID", value = "使用者編號") @RequestParam("userID") String ID)
     {
     	//return GroceryInventory.getNotification(ID);
-		return feignInterface.getNotification(ID);
+		String result = "";
+		
+		try {
+			
+			result = feignInterface.getNotification(ID);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return result;
     }
 	
 	@ApiOperation(value = "購買周邊商品", notes = "若購買成功則回傳購買成功")
@@ -56,7 +66,18 @@ public class GroceryInventoryController {
 	@RequestMapping(value = "orderingGrocery", method = RequestMethod.GET)
     public String orderingGrocery(@ApiParam(required = true, name = "ID", value = "購買的商品編號") @RequestParam("groceryID") String ID, @ApiParam(required = true, name = "quantity", value = "購買的商品數量") @RequestParam("quantity") String quantity)
     {
-    	return GroceryInventory.orderingGrocery(ID, quantity);
+    	//return GroceryInventory.orderingGrocery(ID, quantity);
+		String result = "";
+		
+		try {
+			
+			result = feignInterface.orderingGrocery(ID, quantity);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return result;
     }
 	
 	@ApiOperation(value = "取得已購買的周邊商品", notes = "列出所有已購買的周邊商品")
@@ -64,7 +85,20 @@ public class GroceryInventoryController {
 	@RequestMapping(value = "getGroceryFromOrderList", method = RequestMethod.GET)
     public String getGroceryFromOrderList(@ApiParam(required = true, name = "userID", value = "使用者編號") @RequestParam("userID") String userID)
     {
-    	return GroceryInventory.getGroceryFromOrderList(userID);
+    	//return GroceryInventory.getGroceryFromOrderList(userID);
+    	
+    	String data = "";
+		try {
+			
+			data = feignInterface.getGroceryFromOrderList(userID);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return GroceryInventory.getGroceryFromOrderList(userID, data);
     }
 	
 }

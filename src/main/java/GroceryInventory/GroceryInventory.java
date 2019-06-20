@@ -131,16 +131,18 @@ public class GroceryInventory {
 		return result;
 	}
 	
-	public static String getGroceryFromOrderList(String userID)
+	public static String getGroceryFromOrderList(String userID, String data)
 	{
 		String result = "[";
 		String groceryData = "";
 		//這邊利用Jsoup爬蟲 直接拿到已經購買的Grocery資料
 		try {
+			/*
 			URL url = new URL("http://140.121.196.23:4139/ordering/getGroceryFromOrderList?userID="+userID);
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
 			groceryData = xmlDoc.select("body").get(0).text();
-			
+			*/
+			groceryData = data;
 			
 			
 			//這邊要處理拿到的資料
@@ -162,13 +164,9 @@ public class GroceryInventory {
 			}
 			
 			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -196,9 +194,10 @@ public class GroceryInventory {
 		}
 		return result; 
 	}
-	
+	/*
 	public static void main() throws JSONException
 	{
 		System.out.print(getGroceryFromOrderList("1"));
 	}
+	*/
 }

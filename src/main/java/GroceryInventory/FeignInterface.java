@@ -19,4 +19,10 @@ public interface FeignInterface {
 	@RequestMapping(value = "/notification/getNotification", method = RequestMethod.GET)
     public String getNotification(@RequestParam("userID") String userID);
 	
+	@RequestMapping(value = "/ordering/newGroceryOrdering", method = RequestMethod.GET)
+    public String orderingGrocery(@RequestParam("groceryID") String groceryID, @RequestParam("quantity") String quantity);
+	
+	@RequestMapping(value = "/ordering/getGroceryFromOrderList", method = RequestMethod.GET)
+    public String getGroceryFromOrderList(@RequestParam("userID") String userID);
+	
 }

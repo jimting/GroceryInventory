@@ -16,7 +16,7 @@ public class GroceryInventoryTest
 	public void testIndex()
 	{
 		System.out.println("測試連線是否成功");
-		assertEquals("success", groceryInventory.index());
+		assertEquals("success1", groceryInventory.index());
 	}
 	
 	@Test

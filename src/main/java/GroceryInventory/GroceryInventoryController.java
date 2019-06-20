@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 public class GroceryInventoryController {
 	@Autowired
-	UserInterface userInterface;
+	FeignInterface feignInterface;
 	
 	@ApiOperation(value = "測試此伺服器是否成功連線", notes = "成功連線就回傳success")
 	@CrossOrigin(origins = "*")
@@ -47,7 +47,8 @@ public class GroceryInventoryController {
 	@RequestMapping(value = "getNotification", method = RequestMethod.GET)
     public String getNotification(@ApiParam(required = true, name = "userID", value = "使用者編號") @RequestParam("userID") String ID)
     {
-    	return GroceryInventory.getNotification(ID);
+    	//return GroceryInventory.getNotification(ID);
+		return feignInterface.getNotification(ID);
     }
 	
 	@ApiOperation(value = "購買周邊商品", notes = "若購買成功則回傳購買成功")

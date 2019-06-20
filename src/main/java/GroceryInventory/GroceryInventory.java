@@ -15,6 +15,7 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 
@@ -130,7 +131,7 @@ public class GroceryInventory {
 		return result;
 	}
 	
-	public static String getGroceryFromOrderList(String userID) 
+	public static String getGroceryFromOrderList(String userID)
 	{
 		String result = "[";
 		String groceryData = "";
@@ -139,31 +140,39 @@ public class GroceryInventory {
 			URL url = new URL("http://140.121.196.23:4139/ordering/getGroceryFromOrderList?userID="+userID);
 			org.jsoup.nodes.Document xmlDoc =  Jsoup.parse(url, 3000); //使用Jsoup jar 去解析網頁
 			groceryData = xmlDoc.select("body").get(0).text();
+			
+			
+			
+			//這邊要處理拿到的資料
+			JSONArray groceryList = new JSONArray(groceryData);
+			for(int i = 0; i < groceryList.length();i++) 
+			{
+				JSONObject groceryItem = groceryList.getJSONObject(i);
+				String groceryID = groceryItem.getString("ObjectID");
+				String quantity = groceryItem.getString("Quantity");
+				String groceryTemp=getGroceryByID(groceryID);
+				JSONArray groceryTempData = new JSONArray(groceryTemp);
+				String name = groceryTempData.getJSONObject(0).getString("name");
+				String img_url = groceryTempData.getJSONObject(0).getString("img_url");
+				String price = groceryTempData.getJSONObject(0).getString("price");
+				
+				result += "{\"name\":\""+name+"\",\"quantity\":\""+quantity+"\",\"price\":\""+price+"\",\"img_url\":\""+img_url+"\"}";
+				if(i != groceryList.length()-1)
+					result += ",";
+			}
+			
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
-		//這邊要處理拿到的資料
-		JSONArray groceryList = new JSONArray(groceryData);
-		for(int i = 0; i < groceryList.length();i++) 
-		{
-			JSONObject groceryItem = groceryList.getJSONObject(i);
-			String groceryID = groceryItem.getString("ObjectID");
-			String quantity = groceryItem.getString("Quantity");
-			String groceryTemp=getGroceryByID(groceryID);
-			JSONArray groceryTempData = new JSONArray(groceryTemp);
-			String name = groceryTempData.getJSONObject(0).getString("name");
-			String img_url = groceryTempData.getJSONObject(0).getString("img_url");
-			String price = groceryTempData.getJSONObject(0).getString("price");
-			
-			result += "{\"name\":\""+name+"\",\"quantity\":\""+quantity+"\",\"price\":\""+price+"\",\"img_url\":\""+img_url+"\"}";
-			if(i != groceryList.length()-1)
-				result += ",";
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
+		
+		
 		result += "]";
 		return result;
 	}
@@ -188,7 +197,7 @@ public class GroceryInventory {
 		return result; 
 	}
 	
-	public static void main() 
+	public static void main() throws JSONException
 	{
 		System.out.print(getGroceryFromOrderList("1"));
 	}

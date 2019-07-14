@@ -1,23 +1,17 @@
 package GroceryInventory;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import org.bson.Document;
-
 import com.mongodb.BasicDBObject;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class GroceryInventory {
 	
@@ -95,6 +89,8 @@ public class GroceryInventory {
             return "{}";
         }
 	}
+
+	/* Replace this method with feign
 	public static String getNotification(String ID) 
 	{
 		String result = "";
@@ -112,7 +108,9 @@ public class GroceryInventory {
 		} 
 		return result;
 	}
-	
+	*/
+
+	/* Replace this method with feign
 	public static String orderingGrocery(String ID, String quantity) 
 	{
 		String result = "";
@@ -130,7 +128,9 @@ public class GroceryInventory {
 		} 
 		return result;
 	}
-	
+	*/
+
+
 	public static String getGroceryFromOrderList(String userID, String data)
 	{
 		String result = "[";
@@ -174,7 +174,7 @@ public class GroceryInventory {
 		result += "]";
 		return result;
 	}
-	
+
 	public static String testNotification(String userID, String content) 
 	{
 		String result = "";

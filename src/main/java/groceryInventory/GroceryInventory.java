@@ -1,4 +1,4 @@
-package GroceryInventory;
+package groceryInventory;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
@@ -90,7 +90,7 @@ public class GroceryInventory {
         }
 	}
 
-	/* Replace this method with feign
+	//  Replace this method with feign
 	public static String getNotification(String ID) 
 	{
 		String result = "";
@@ -108,9 +108,9 @@ public class GroceryInventory {
 		} 
 		return result;
 	}
-	*/
 
-	/* Replace this method with feign
+
+	//	Replace this method with feign
 	public static String orderingGrocery(String ID, String quantity) 
 	{
 		String result = "";
@@ -128,7 +128,7 @@ public class GroceryInventory {
 		} 
 		return result;
 	}
-	*/
+
 
 
 	public static String getGroceryFromOrderList(String userID, String data)

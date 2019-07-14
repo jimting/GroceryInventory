@@ -1,4 +1,4 @@
-package GroceryInventory;
+package groceryInventory;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

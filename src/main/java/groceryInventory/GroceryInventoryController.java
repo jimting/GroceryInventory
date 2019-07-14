@@ -1,22 +1,20 @@
-package GroceryInventory;
+package groceryInventory;
 
-import org.springframework.web.bind.annotation.RestController;
-
+import groceryInventory.feign.NotificationInterface;
+import groceryInventory.feign.OrderingInterface;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Api(value = "GroceryInventoryController", tags = "與周邊商品相關的所有一切都在這裡")
 @RestController
 public class GroceryInventoryController {
 	@Autowired
-	FeignInterface feignInterface;
+	NotificationInterface notificationInterface;
+	@Autowired
+	OrderingInterface orderingInterface;
 	
 	@ApiOperation(value = "測試此伺服器是否成功連線", notes = "成功連線就回傳success")
 	@CrossOrigin(origins = "*")
@@ -47,12 +45,11 @@ public class GroceryInventoryController {
 	@RequestMapping(value = "getNotification", method = RequestMethod.GET)
     public String getNotification(@ApiParam(required = true, name = "userID", value = "使用者編號") @RequestParam("userID") String ID)
     {
-    	//return GroceryInventory.getNotification(ID);
 		String result = "";
 		
 		try {
 			
-			result = feignInterface.getNotification(ID);
+			result = notificationInterface.getNotification(ID);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,12 +63,11 @@ public class GroceryInventoryController {
 	@RequestMapping(value = "orderingGrocery", method = RequestMethod.GET)
     public String orderingGrocery(@ApiParam(required = true, name = "ID", value = "購買的商品編號") @RequestParam("groceryID") String ID, @ApiParam(required = true, name = "quantity", value = "購買的商品數量") @RequestParam("quantity") String quantity)
     {
-    	//return GroceryInventory.orderingGrocery(ID, quantity);
 		String result = "";
 		
 		try {
 			
-			result = feignInterface.orderingGrocery(ID, quantity);
+			result = orderingInterface.orderingGrocery(ID, quantity);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,12 +81,11 @@ public class GroceryInventoryController {
 	@RequestMapping(value = "getGroceryFromOrderList", method = RequestMethod.GET)
     public String getGroceryFromOrderList(@ApiParam(required = true, name = "userID", value = "使用者編號") @RequestParam("userID") String userID)
     {
-    	//return GroceryInventory.getGroceryFromOrderList(userID);
     	
     	String data = "";
 		try {
 			
-			data = feignInterface.getGroceryFromOrderList(userID);
+			data = orderingInterface.getGroceryFromOrderList(userID);
 			
 			
 		} catch (Exception e) {

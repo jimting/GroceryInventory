@@ -1,7 +1,8 @@
-package groceryInventory;
+package groceryinventory.controller;
 
-import groceryInventory.feign.NotificationInterface;
-import groceryInventory.feign.OrderingInterface;
+import groceryinventory.GroceryInventory;
+import groceryinventory.feign.NotificationInterface;
+import groceryinventory.feign.OrderingInterface;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

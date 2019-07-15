@@ -1,5 +1,6 @@
-package groceryInventory;
+package groceryinventory;
 
+import groceryinventory.controller.GroceryInventoryController;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

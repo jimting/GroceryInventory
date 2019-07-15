@@ -194,10 +194,4 @@ public class GroceryInventory {
 		}
 		return result; 
 	}
-	/*
-	public static void main() throws JSONException
-	{
-		System.out.print(getGroceryFromOrderList("1"));
-	}
-	*/
 }
